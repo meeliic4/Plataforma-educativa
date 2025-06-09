@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plataforma Educativa Virtual</title>
+  <style>
+    #perfil-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#imagenPerfil {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+  margin-bottom: 5px;
+}
+
+#selectorPerfil {
+  font-size: 12px;
+  padding: 2px;
+}
+#subirPerfil {
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3e6f5;
+    }
+
+    #mural img {
+  max-width: 200px;
+  height: auto;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  display: block;
+}
+
+.mural-item {
+  position: relative;
+  width: 200px;
+}
+
+.mural-item button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+
+    header {
+      background-color: #a15085;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0;
+      background-color: #a15085;
+      margin: 0;
+    }
+
+    nav ul li {
+      margin: 5px 10px;
+    }
+
+    nav ul li a {
+      color: #99628c; 
+      text-decoration: none;
+      padding: 10px;
+      display: block;
+      cursor: pointer;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .seccion {
+      display: none;
+    }
+
+    .seccion.visible {
+      display: block;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #333;
+      color: white;
+      margin-top: 30px;
+    }
+
+    .formulario {
+      background-color: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .formulario h3 {
+      margin-top: 0;
+    }
+
+    .formulario label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    .formulario input,
+    .formulario select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    .formulario > button {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      font-size: 16px;
+    }
+    .formulario > button:hover {
+      background-color: #45a049;
+    }
+
+    ul li {
+      position: relative;
+      padding-right: 30px; /* espacio para botón eliminar */
+      margin-bottom: 6px;
+      list-style: none;
+      display: block;
+      background: #e9e9e9;
+      padding: 8px 10px;
+      border-radius: 4px;
+    }
+
+    ul li button {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      border: none;
+      background-color: #e74c3c;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      line-height: 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    ul li button:hover {
+      background-color: #c0392b;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div id="perfil-container">
+      <img id="imagenPerfil" src="https://i.imgur.com/1XqRk8X.png" alt="Perfil" />
+      <select id="selectorPerfil">
+        <option value="https://i.imgur.com/1XqRk8X.png">Avatar 1</option>
+        <option value="https://i.imgur.com/zLzGGAq.png">Avatar 2</option>
+        <option value="https://i.imgur.com/eM6W3UZ.png">Avatar 3</option>
+        <option value="https://i.imgur.com/ob0yZkb.png">Avatar 4</option>
+      </select>
+      <input type="file" id="subirPerfil" accept="image/*" title="Subir imagen personalizada" />
+    </div>
+    
+    
+    <h1>Plataforma Educativa Virtual</h1>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="mostrarSeccion('diagnostico')">Diagnóstico</a></li>
+        <li><a href="#" onclick="mostrarSeccion('actividades')">Actividades</a></li>
+        <li><a href="#" onclick="mostrarSeccion('evaluacion')">Evaluación</a></li>
+        <li><a href="#" onclick="mostrarSeccion('juegos')">Juegos</a></li>
+        <li><a href="#" onclick="mostrarSeccion('manual')">Manual</a></li>
+        <li><a href="#" onclick="mostrarSeccion('datosDocente')">Datos Docente</a></li>
+        <li><a href="#" onclick="mostrarSeccion('calendario')">Calendario</a></li>
+        <li><a href="#" onclick="mostrarSeccion('mural')">Mural</a></li>
+
+
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sección Diagnóstico -->
+    <section id="diagnostico" class="seccion">
+      <h2>Diagnóstico y Creación de Grupos y Temas</h2>
+
+      <!-- Crear Grupo -->
+      <div class="formulario">
+        <h3>Crear Grupo</h3>
+        <form id="formGrupo">
+          <label for="nombreGrupo">Nombre del grupo:</label>
+          <input type="text" id="nombreGrupo" required />
+          <button type="submit">Crear Grupo</button>
+        </form>
+        <ul id="listaGrupos"></ul>
+      </div>
+
+      <!-- Crear Tema -->
+      <div class="formulario">
+        <h3>Crear Tema</h3>
+        <form id="formTema">
+          <label for="grupoSelect">Selecciona grupo:</label>
+          <select id="grupoSelect" required></select>
+
+          <label for="nombreTema">Nombre del tema:</label>
+          <input type="text" id="nombreTema" required />
+
+          <button type="submit">Crear Tema</button>
+        </form>
+        <ul id="listaTemas"></ul>
+      </div>
+    </section>
+
+    <!-- Sección Mural -->
+<section id="mural" class="seccion">
+  <h2>Mural de Imágenes</h2>
+  <div class="formulario">
+    <form id="formMural">
+      <label for="muralTitulo">Título de la imagen:</label>
+      <input type="text" id="muralTitulo" required />
+
+      <label for="muralImagen">Selecciona una imagen:</label>
+      <input type="file" id="muralImagen" accept="image/*" required />
+
+      <button type="submit">Agregar al Mural</button>
+    </form>
+  </div>
+  <div id="galeriaMural" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+</section>
+
+
+    <!-- Sección Calendario -->
+<section id="calendario" class="seccion">
+  <h2>Calendario de Actividades</h2>
+  <div class="formulario">
+    <form id="formCalendario">
+      <label for="tituloEvento">Título del evento:</label>
+      <input type="text" id="tituloEvento" required />
+
+      <label for="fechaEvento">Fecha:</label>
+      <input type="date" id="fechaEvento" required />
+
+      <button type="submit">Agregar Evento</button>
+    </form>
+  </div>
+  <ul id="listaEventos"></ul>
+</section>
+
+
+    <!-- Sección Actividades -->
+    <section id="actividades" class="seccion">
+      <h2>Actividades</h2>
+
+      <!-- Filtrar actividades por tema -->
+      <div class="formulario">
+        <label for="filtroTema">Filtrar actividades por tema:</label>
+        <select id="filtroTema">
+          <option value="">-- Todos los temas --</option>
+        </select>
+      </div>
+
+      <!-- Crear Pregunta -->
+      <div class="formulario">
+        <h3>Crear Pregunta</h3>
+        <form id="formPregunta">
+          <label for="preguntaTexto">Escribe tu pregunta:</label>
+          <input type="text" id="preguntaTexto" required />
+
+          <label for="temaPregunta">Selecciona tema para la pregunta:</label>
+          <select id="temaPregunta" required></select>
+
+          <button type="submit">Guardar Pregunta</button>
+        </form>
+        <ul id="listaPreguntas"></ul>
+      </div>
+
+      <!-- Subir Evidencias -->
+      <div class="formulario">
+  	<h3>Subir Evidencia</h3>
+  	<form id="formEvidencia">
+    	  <label for="temaEvidencia">Selecciona tema para la evidencia:</label>
+  	  <select id="temaEvidencia" required></select>
+
+   	  <label for="archivoEvidencia">Selecciona archivo:</label>
+    		<input type="file" id="archivoEvidencia" required />
+
+    	<button type="submit">Subir Evidencia</button>
+ 	</form>
+ 	<ul id="listaEvidencias"></ul>
+</div>
+
+
+      <!-- Agregar Video -->
+      <div class="formulario">
+        <h3>Agregar Video Educativo</h3>
+        <form id="formVideo">
+          <label for="videoLink">Enlace del video (YouTube, Vimeo...):</label>
+          <input type="url" id="videoLink" required />
+
+          <label for="temaVideo">Selecciona tema para el video:</label>
+          <select id="temaVideo" required></select>
+
+          <button type="submit">Guardar Video</button>
+        </form>
+        <ul id="listaVideos"></ul>
+      </div>
+
+      <!-- Agregar Audio -->
+      <div class="formulario">
+        <h3>Agregar Audio Educativo</h3>
+        <form id="formAudio">
+          <label for="audioLink">Enlace del audio (Vocaroo, SoundCloud...):</label>
+          <input type="url" id="audioLink" required />
+
+          <label for="temaAudio">Selecciona tema para el audio:</label>
+          <select id="temaAudio" required></select>
+
+          <button type="submit">Guardar Audio</button>
+        </form>
+        <ul id="listaAudios"></ul>
+      </div>
+
+      <!-- Herramientas externas -->
+      <div class="formulario">
+        <h3>Herramientas Externas Recomendadas</h3>
+        <ul>
+          <li>
+            <a href="https://www.classmarker.com/" target="_blank"
+              >Crear Examen (ClassMarker)</a
+            >
+          </li>
+          <li>
+            <a href="https://quizizz.com/" target="_blank"
+              >Crear Cuestionario (Quizizz)</a
+            >
+          </li>
+          <li>
+            <a href="https://www.google.com/forms/about/" target="_blank"
+              >Crear Formularios (Google Forms)</a
+            >
+          </li>
+          <li><a href="https://www.youtube.com/upload" target="_blank"
+            >Subir Video a YouTube</a
+          ></li>
+          <li><a href="https://vocaroo.com/" target="_blank">Grabar Audio (Vocaroo)</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Sección Evaluación -->
+    <section id="evaluacion" class="seccion">
+      <h2>Evaluación</h2>
+      <h3>Forma de evaluación del docente</h3>
+<form id="formEvaluacionDocente">
+  <label for="evaluacionTexto">Describa su forma de evaluar:</label><br>
+  <textarea id="evaluacionTexto" rows="5" cols="50" placeholder="Ej: Evaluación continua, exámenes escritos, participación, etc."></textarea><br><br>
+  <button type="submit">Guardar evaluación</button>
+</form>
+
+<div id="evaluacionGuardada" style="margin-top: 10px; background: #f4f4f4; padding: 10px; border-radius: 5px;">
+  <strong>Forma de evaluación registrada:</strong>
+  <p id="textoEvaluacionDocente">Aún no registrada.</p>
+</div>
+
+    </section>
+
+
+    <!-- Sección Juegos -->
+    <section id="juegos" class="seccion">
+      <h2>Juegos Educativos</h2>
+      <ul>
+        <li><a href="https://www.starfall.com/h/" target="_blank">Starfalls</a></li>
+        <li><a href="https://www.funbrain.com/" target="_blank">Funbrain</a></li>
+        <li><a href="https://www.coolmath4kids.com/" target="_blank">Cool Math 4 Kids</a></li>
+        <li><a href="https://kids.nationalgeographic.com/games/" target="_blank">National Geographic Kids</a></li>
+        <li><a href="https://pbskids.org/games/" target="_blank">PBS Kids</a></li>
+        <li><a href="https://www.cerebriti.com/juegos/historia-peru" target="_blank">Games</a></li>
+      </ul>
+    </section>
+
+    <!-- Sección Manual -->
+    <section id="manual" class="seccion">
+      <h2>Manual para el Usuario</h2>
+      <p>
+        Bienvenido al manual de uso. Aquí encontrarás instrucciones para
+        navegar y usar todas las funcionalidades de esta plataforma.
+      </p>
+      <ul>
+        <li>
+          <strong>Diagnóstico:</strong> Crear grupos y temas para organizar las
+          actividades.
+        </li>
+        <li>
+          <strong>Actividades:</strong> Añadir preguntas, videos y audios para
+          cada tema.
+        </li>
+        <li><strong>Mural:</strong> Espacio para subir imagenes.</li>
+        <li><strong>Calendario:</strong> Espacio para agendar fechas de eventos.</li>
+        <li><strong>Evaluación:</strong> Herramientas para evaluación y seguimiento.</li>
+        <li><strong>Juegos:</strong> Acceso a juegos educativos externos.</li>
+        <li><strong>Datos Docente:</strong> Actualizar y mostrar información del docente.</li>
+      </ul>
+    </section>
+
+    <!-- Sección Datos Docente -->
+    <section id="datosDocente" class="seccion">
+      <h2>Datos del Docente</h2>
+      <div class="formulario">
+        <form id="formDatosDocente">
+          <label for="nombreDocente">Nombre completo:</label>
+          <input type="text" id="nombreDocente" required />
+
+          <label for="correoDocente">Correo electrónico:</label>
+          <input type="email" id="correoDocente" required />
+
+          <label for="institucionDocente">Institución educativa:</label>
+          <input type="text" id="institucionDocente" required />
+
+          <label for="avatarDocente">Avatar del docente:</label><br>
+<input type="file" id="avatarDocente" accept="image/*"><br><br>
+
+
+          <button type="submit">Guardar Datos</button>
+          
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p id="footerDatosDocente">Datos del docente no registrados.</p>
+    <div id="footerDatosDocente">
+      <!-- Aquí ya tienes los datos del docente -->
+    </div>
+    <img id="avatarPreview" src="" alt="Avatar del docente" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; display: none; margin-top: 10px;">
+    
+  </footer>
+
+  <script>
+    // Imagen de perfil
+const imagenPerfil = document.getElementById('imagenPerfil');
+const selectorPerfil = document.getElementById('selectorPerfil');
+
+
+// Cargar imagen guardada si existe
+const imagenGuardada = localStorage.getItem('imagenPerfil');
+if (imagenGuardada) {
+  imagenPerfil.src = imagenGuardada;
+  selectorPerfil.value = imagenGuardada;
+}
+
+// Cambiar imagen de perfil
+selectorPerfil.addEventListener('change', () => {
+  const nuevaImagen = selectorPerfil.value;
+  imagenPerfil.src = nuevaImagen;
+  localStorage.setItem('imagenPerfil', nuevaImagen);
+});
+
+    // Manejo de secciones
+    function mostrarSeccion(id) {
+      document.querySelectorAll('.seccion').forEach(sec => {
+        sec.classList.remove('visible');
+      });
+      const seccion = document.getElementById(id);
+      if (seccion) {
+        seccion.classList.add('visible');
+      }
+    }
+
+    const subirPerfil = document.getElementById('subirPerfil');
+
+// Si hay imagen personalizada guardada (base64), úsala
+const imagenPersonal = localStorage.getItem('imagenPerfilPersonal');
+if (imagenPersonal) {
+  imagenPerfil.src = imagenPersonal;
+}
+
+// Escuchar cambios del selector
+selectorPerfil.addEventListener('change', () => {
+  const nuevaImagen = selectorPerfil.value;
+  imagenPerfil.src = nuevaImagen;
+  localStorage.setItem('imagenPerfil', nuevaImagen);
+  localStorage.removeItem('imagenPerfilPersonal'); // si se cambia a predefinida, eliminamos la personalizada
+});
+
+// Subir imagen personalizada
+subirPerfil.addEventListener('change', () => {
+  const file = subirPerfil.files[0];
+  if (file && file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const imgBase64 = e.target.result;
+      imagenPerfil.src = imgBase64;
+      localStorage.setItem('imagenPerfilPersonal', imgBase64);
+      localStorage.removeItem('imagenPerfil'); // quitamos la predefinida si hay
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+    // Inicializamos mostrando Diagnóstico
+    mostrarSeccion('diagnostico');
+
+    // --- Datos ---
+    let grupos = JSON.parse(localStorage.getItem('grupos')) || [];
+    let temas = JSON.parse(localStorage.getItem('temas')) || [];
+    let preguntas = JSON.parse(localStorage.getItem('preguntas')) || [];
+    let videos = JSON.parse(localStorage.getItem('videos')) || [];
+    let audios = JSON.parse(localStorage.getItem('audios')) || [];
+    let evidencias = JSON.parse(localStorage.getItem('evidencias')) || [];
+    let eventos = JSON.parse(localStorage.getItem('eventos')) || [];
+    let mural = JSON.parse(localStorage.getItem('mural')) || [];
+
+
+
+
+    // Datos docente
+    let datosDocente = JSON.parse(localStorage.getItem('datosDocente')) || null;
+
+    // Actualizar footer con datos docente
+    function actualizarFooterDatosDocente() {
+      const footer = document.getElementById('footerDatosDocente');
+      if (datosDocente) {
+        footer.textContent = `Docente: ${datosDocente.nombre} | Email: ${datosDocente.correo} | Institución: ${datosDocente.institucion}`;
+      } else {
+        footer.textContent = 'Datos del docente no registrados.';
+      }
+    }
+    actualizarFooterDatosDocente();
+
+    // --- Funciones para guardar y cargar datos ---
+
+    function guardarLocal(key, data) {
+      localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    function actualizarListaEventos() {
+  const ul = document.getElementById('listaEventos');
+  ul.innerHTML = '';
+  eventos.forEach((ev, i) => {
+    const li = document.createElement('li');
+    li.textContent = `${ev.fecha} - ${ev.titulo}`;
+    const btn = document.createElement('button');
+    btn.textContent = '×';
+    btn.title = 'Eliminar evento';
+    btn.onclick = () => {
+      if (confirm('¿Eliminar este evento?')) {
+        eliminarEvento(i);
+      }
+    };
+    li.appendChild(btn);
+    ul.appendChild(li);
+  });
+}
+function eliminarEvento(index) {
+  eventos.splice(index, 1);
+  guardarLocal('eventos', eventos);
+  actualizarListaEventos();
+}
+
+
+
+
+    // --- Mostrar listas ---
+
+    function actualizarListaGrupos() {
+      const ul = document.getElementById('listaGrupos');
+      ul.innerHTML = '';
+      grupos.forEach((g, i) => {
+        const li = document.createElement('li');
+        li.textContent = g.nombre;
+        const btn = document.createElement('button');
+        btn.textContent = '×';
+        btn.title = 'Eliminar grupo';
+        btn.onclick = () => {
+          if (confirm(`Eliminar grupo "${g.nombre}" y sus temas?`)) {
+            eliminarGrupo(i);
+          }
+        };
+        li.appendChild(btn);
+        ul.appendChild(li);
+      });
+      actualizarSelectsGrupos();
+    }
+
+    function actualizarSelectsGrupos() {
+      const grupoSelect = document.getElementById('grupoSelect');
+      grupoSelect.innerHTML = '';
+      grupos.forEach((g, i) => {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = g.nombre;
+        grupoSelect.appendChild(option);
+      });
+    }
+
+    function actualizarListaTemas() {
+      const ul = document.getElementById('listaTemas');
+      ul.innerHTML = '';
+      temas.forEach((t, i) => {
+        const grupoNombre = grupos[t.grupoIndex] ? grupos[t.grupoIndex].nombre : '(Grupo eliminado)';
+        const li = document.createElement('li');
+        li.textContent = `${t.nombre} (Grupo: ${grupoNombre})`;
+        const btn = document.createElement('button');
+        btn.textContent = '×';
+        btn.title = 'Eliminar tema';
+        btn.onclick = () => {
+          if (confirm(`Eliminar tema "${t.nombre}"?`)) {
+            eliminarTema(i);
+          }
+        };
+        li.appendChild(btn);
+        ul.appendChild(li);
+      });
+      actualizarSelectsTemas();
+      actualizarFiltroTemas();
+    }
+
+    function actualizarSelectsTemas() {
+      const selectIds = ['temaPregunta', 'temaVideo', 'temaAudio', 'temaEvidencia'];
+      selectIds.forEach(id => {
+        const select = document.getElementById(id);
+        select.innerHTML = '';
+        temas.forEach((t, i) => {
+          const option = document.createElement('option');
+          option.value = i;
+          option.textContent = t.nombre;
+          select.appendChild(option);
+        });
+      });
+    }
+
+    function actualizarFiltroTemas() {
+      const filtroTema = document.getElementById('filtroTema');
+      filtroTema.innerHTML = '<option value="">-- Todos los temas --</option>';
+      temas.forEach((t, i) => {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = t.nombre;
+        filtroTema.appendChild(option);
+      });
+    }
+
+    function actualizarListaPreguntas() {
+      const ul = document.getElementById('listaPreguntas');
+      ul.innerHTML = '';
+      const filtro = document.getElementById('filtroTema').value;
+      preguntas.forEach((p, i) => {
+        if (filtro === '' || p.temaIndex == filtro) {
+          const li = document.createElement('li');
+          li.textContent = p.texto;
+          const btn = document.createElement('button');
+          btn.textContent = '×';
+          btn.title = 'Eliminar pregunta';
+          btn.onclick = () => {
+            if (confirm('Eliminar esta pregunta?')) {
+              eliminarPregunta(i);
+            }
+          };
+          li.appendChild(btn);
+          ul.appendChild(li);
+        }
+      });
+    }
+
+    function actualizarListaVideos() {
+      const ul = document.getElementById('listaVideos');
+      ul.innerHTML = '';
+      videos.forEach((v, i) => {
+        const temaNombre = temas[v.temaIndex] ? temas[v.temaIndex].nombre : '(Tema eliminado)';
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="${v.link}" target="_blank">${v.link}</a> (Tema: ${temaNombre})`;
+        const btn = document.createElement('button');
+        btn.textContent = '×';
+        btn.title = 'Eliminar video';
+        btn.onclick = () => {
+          if (confirm('Eliminar este video?')) {
+            eliminarVideo(i);
+          }
+        };
+        li.appendChild(btn);
+        ul.appendChild(li);
+      });
+    }
+
+    function actualizarListaAudios() {
+      const ul = document.getElementById('listaAudios');
+      ul.innerHTML = '';
+      audios.forEach((a, i) => {
+        const temaNombre = temas[a.temaIndex] ? temas[a.temaIndex].nombre : '(Tema eliminado)';
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="${a.link}" target="_blank">${a.link}</a> (Tema: ${temaNombre})`;
+        const btn = document.createElement('button');
+        btn.textContent = '×';
+        btn.title = 'Eliminar audio';
+        btn.onclick = () => {
+          if (confirm('Eliminar este audio?')) {
+            eliminarAudio(i);
+          }
+        };
+        li.appendChild(btn);
+        ul.appendChild(li);
+      });
+    }
+
+    function actualizarListaEvidencias() {
+  const ul = document.getElementById('listaEvidencias');
+  ul.innerHTML = '';
+  evidencias.forEach((e, i) => {
+    const temaNombre = temas[e.temaIndex] ? temas[e.temaIndex].nombre : '(Tema eliminado)';
+    const li = document.createElement('li');
+    li.innerHTML = `<a href="${e.url}" download="${e.nombre}" target="_blank">${e.nombre}</a> (Tema: ${temaNombre})`;
+    const btn = document.createElement('button');
+    btn.textContent = '×';
+    btn.title = 'Eliminar evidencia';
+    btn.onclick = () => {
+      if (confirm('¿Eliminar esta evidencia?')) {
+        eliminarEvidencia(i);
+      }
+    };
+    li.appendChild(btn);
+    ul.appendChild(li);
+  });
+}
+
+function eliminarEvidencia(index) {
+  evidencias.splice(index, 1);
+  guardarLocal('evidencias', evidencias);
+  actualizarListaEvidencias();
+}
+
+   
+
+function eliminarEvidencia(index) {
+  evidencias.splice(index, 1);
+  guardarLocal('evidencias', evidencias);
+  actualizarListaEvidencias();
+}
+
+
+    // --- Eliminar elementos ---
+    function eliminarGrupo(index) {
+      grupos.splice(index, 1);
+      // También eliminamos temas que pertenecen a este grupo
+      temas = temas.filter(t => t.grupoIndex !== index);
+      // Ajustar índices de temas con grupoIndex mayor a eliminado
+      temas.forEach(t => {
+        if (t.grupoIndex > index) t.grupoIndex--;
+      });
+      guardarLocal('grupos', grupos);
+      guardarLocal('temas', temas);
+      actualizarListaGrupos();
+      actualizarListaTemas();
+    }
+
+    function eliminarTema(index) {
+      temas.splice(index, 1);
+      // Ajustar índices de temas en preguntas, videos y audios
+      preguntas = preguntas.filter(p => p.temaIndex !== index);
+      videos = videos.filter(v => v.temaIndex !== index);
+      audios = audios.filter(a => a.temaIndex !== index);
+
+      // Ajustar indices mayores que eliminado
+      function reajustarIndices(arr) {
+        arr.forEach(item => {
+          if (item.temaIndex > index) item.temaIndex--;
+        });
+      }
+      reajustarIndices(preguntas);
+      reajustarIndices(videos);
+      reajustarIndices(audios);
+
+      guardarLocal('temas', temas);
+      guardarLocal('preguntas', preguntas);
+      guardarLocal('videos', videos);
+      guardarLocal('audios', audios);
+
+      actualizarListaTemas();
+      actualizarListaPreguntas();
+      actualizarListaVideos();
+      actualizarListaAudios();
+    }
+
+    function eliminarPregunta(index) {
+      preguntas.splice(index, 1);
+      guardarLocal('preguntas', preguntas);
+      actualizarListaPreguntas();
+    }
+
+    function eliminarVideo(index) {
+      videos.splice(index, 1);
+      guardarLocal('videos', videos);
+      actualizarListaVideos();
+    }
+
+    function eliminarAudio(index) {
+      audios.splice(index, 1);
+      guardarLocal('audios', audios);
+      actualizarListaAudios();
+    }
+
+    // --- Formularios ---
+
+    //evidencia
+    document.getElementById('formEvidencia').addEventListener('submit', e => {
+  e.preventDefault();
+  const inputFile = document.getElementById('archivoEvidencia');
+  const file = inputFile.files[0];
+  const temaIndex = parseInt(document.getElementById('temaEvidencia').value);
+
+  if (file && !isNaN(temaIndex)) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      evidencias.push({
+        nombre: file.name,
+        url: event.target.result,
+        temaIndex
+      });
+      guardarLocal('evidencias', evidencias);
+      actualizarListaEvidencias();
+      document.getElementById('formEvidencia').reset();
+    };
+    reader.readAsDataURL(file); // guarda el archivo como base64
+  }
+});
+
+document.getElementById('formCalendario').addEventListener('submit', e => {
+  e.preventDefault();
+  const titulo = document.getElementById('tituloEvento').value.trim();
+  const fecha = document.getElementById('fechaEvento').value;
+
+  if (titulo && fecha) {
+    eventos.push({ titulo, fecha });
+    guardarLocal('eventos', eventos);
+    actualizarListaEventos();
+    document.getElementById('formCalendario').reset();
+  }
+});
+
+
+
+    // Crear grupo
+    document.getElementById('formGrupo').addEventListener('submit', e => {
+      e.preventDefault();
+      const nombre = document.getElementById('nombreGrupo').value.trim();
+      if (nombre) {
+        grupos.push({ nombre });
+        guardarLocal('grupos', grupos);
+        actualizarListaGrupos();
+        document.getElementById('formGrupo').reset();
+      }
+    });
+
+    // Crear tema
+    document.getElementById('formTema').addEventListener('submit', e => {
+      e.preventDefault();
+      const grupoIndex = parseInt(document.getElementById('grupoSelect').value);
+      const nombreTema = document.getElementById('nombreTema').value.trim();
+      if (nombreTema && !isNaN(grupoIndex)) {
+        temas.push({ nombre: nombreTema, grupoIndex });
+        guardarLocal('temas', temas);
+        actualizarListaTemas();
+        document.getElementById('formTema').reset();
+      }
+    });
+
+    // Crear pregunta
+    document.getElementById('formPregunta').addEventListener('submit', e => {
+      e.preventDefault();
+      const texto = document.getElementById('preguntaTexto').value.trim();
+      const temaIndex = parseInt(document.getElementById('temaPregunta').value);
+      if (texto && !isNaN(temaIndex)) {
+        preguntas.push({ texto, temaIndex });
+        guardarLocal('preguntas', preguntas);
+        actualizarListaPreguntas();
+        document.getElementById('formPregunta').reset();
+      }
+    });
+
+    // Crear video
+    document.getElementById('formVideo').addEventListener('submit', e => {
+      e.preventDefault();
+      const link = document.getElementById('videoLink').value.trim();
+      const temaIndex = parseInt(document.getElementById('temaVideo').value);
+      if (link && !isNaN(temaIndex)) {
+        videos.push({ link, temaIndex });
+        guardarLocal('videos', videos);
+        actualizarListaVideos();
+        document.getElementById('formVideo').reset();
+      }
+    });
+
+    // Crear audio
+    document.getElementById('formAudio').addEventListener('submit', e => {
+      e.preventDefault();
+      const link = document.getElementById('audioLink').value.trim();
+      const temaIndex = parseInt(document.getElementById('temaAudio').value);
+      if (link && !isNaN(temaIndex)) {
+        audios.push({ link, temaIndex });
+        guardarLocal('audios', audios);
+        actualizarListaAudios();
+        document.getElementById('formAudio').reset();
+      }
+    });
+
+    // Filtrar preguntas por tema
+    document.getElementById('filtroTema').addEventListener('change', actualizarListaPreguntas);
+
+    // Guardar datos docente
+    document.getElementById('formDatosDocente').addEventListener('submit', e => {
+      e.preventDefault();
+      const nombre = document.getElementById('nombreDocente').value.trim();
+      const correo = document.getElementById('correoDocente').value.trim();
+      const institucion = document.getElementById('institucionDocente').value.trim();
+
+      if (nombre && correo && institucion) {
+        datosDocente = { nombre, correo, institucion };
+        localStorage.setItem('datosDocente', JSON.stringify(datosDocente));
+        actualizarFooterDatosDocente();
+        alert('Datos del docente guardados correctamente.');
+        document.getElementById('formDatosDocente').reset();
+      }
+      document.getElementById('formDatosDocente').addEventListener('submit', e => {
+  e.preventDefault();
+  const nombre = document.getElementById('nombreDocente').value.trim();
+  const correo = document.getElementById('correoDocente').value.trim();
+  const institucion = document.getElementById('institucionDocente').value.trim();
+  const avatarInput = document.getElementById('avatarDocente');
+  const avatarFile = avatarInput.files[0];
+
+  if (nombre && correo && institucion) {
+    if (avatarFile) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        datosDocente = {
+          nombre,
+          correo,
+          institucion,
+          avatar: event.target.result
+        };
+        localStorage.setItem('datosDocente', JSON.stringify(datosDocente));
+        actualizarFooterDatosDocente();
+        alert('Datos del docente y avatar guardados correctamente.');
+        document.getElementById('formDatosDocente').reset();
+      };
+      reader.readAsDataURL(avatarFile);
+    } else {
+      // Si no se actualiza el avatar
+      datosDocente = {
+        nombre,
+        correo,
+        institucion,
+        avatar: datosDocente?.avatar || ''
+      };
+      localStorage.setItem('datosDocente', JSON.stringify(datosDocente));
+      actualizarFooterDatosDocente();
+      alert('Datos del docente guardados correctamente.');
+      document.getElementById('formDatosDocente').reset();
+      function actualizarFooterDatosDocente() {
+  const footer = document.getElementById('footerDatosDocente');
+  const avatar = document.getElementById('avatarPreview');
+  
+  if (datosDocente) {
+    footer.textContent = `Docente: ${datosDocente.nombre} | Email: ${datosDocente.correo} | Institución: ${datosDocente.institucion}`;
+    
+    if (datosDocente.avatar) {
+      avatar.src = datosDocente.avatar;
+      avatar.style.display = 'inline-block';
+    } else {
+      avatar.style.display = 'none';
+    }
+  } else {
+    footer.textContent = 'Datos del docente no registrados.';
+    avatar.style.display = 'none';
+  }
+}
+
+    }
+  }
+});
+
+    });
+
+    // Cargar datos iniciales al cargar la página
+    actualizarListaGrupos();
+    actualizarListaTemas();
+    actualizarListaPreguntas();
+    actualizarListaVideos();
+    actualizarListaAudios();
+    actualizarListaEvidencias(); 
+    actualizarListaEventos();
+
+
+
+    // Si hay datos docente, llenar formulario
+    if (datosDocente) {
+      document.getElementById('nombreDocente').value = datosDocente.nombre || '';
+      document.getElementById('correoDocente').value = datosDocente.correo || '';
+      document.getElementById('institucionDocente').value = datosDocente.institucion || '';
+    }
+
+    // Guardar forma de evaluación
+document.getElementById('formEvaluacionDocente').addEventListener('submit', e => {
+  e.preventDefault();
+  const texto = document.getElementById('evaluacionTexto').value.trim();
+  if (texto) {
+    localStorage.setItem('evaluacionDocente', texto);
+    mostrarEvaluacionDocente();
+    alert('Forma de evaluación guardada correctamente.');
+    document.getElementById('formEvaluacionDocente').reset();
+  }
+});
+
+// Mostrar forma de evaluación guardada
+function mostrarEvaluacionDocente() {
+  const texto = localStorage.getItem('evaluacionDocente');
+  const contenedor = document.getElementById('textoEvaluacionDocente');
+  contenedor.textContent = texto || 'Aún no registrada.';
+}
+
+// Mostrar evaluación al cargar página
+mostrarEvaluacionDocente();
+
+  </script>
+</body>
+</html>
+		
+		
